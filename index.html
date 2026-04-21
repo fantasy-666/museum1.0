@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智鉴文渊</title>
+    <style>
+        /* 完全保留您原有的所有样式，未做任何删减 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        
+        body {
+            background-color: #f5f2ea;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #8B7355 0%, #6B5B4D 100%);
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            background: #8B7355;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-button:hover {
+            background: #6B5B4D;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-button.active {
+            background: #5D4A3C;
+            transform: translateY(-2px);
+        }
+        
+        /* 搜索功能样式 */
+        .search-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0d9cc;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #8B7355;
+        }
+        
+        .search-button {
+            background: #8B7355;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .search-button:hover {
+            background: #6B5B4D;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        .filter-button {
+            background: #f0e6d6;
+            border: 2px solid #e0d9cc;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-button.active {
+            background: #8B7355;
+            color: white;
+            border-color: #8B7355;
+        }
+        
+        .search-results {
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .results-count {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid #e8e1d5;
+        }
+        
+        .result-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .result-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .result-title {
+            color: #8B7355;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .result-era {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .result-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 1.1rem;
+        }
+        
+        /* 推荐功能样式 */
+        .recommendation-section {
+            background: #f9f7f3;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8e1d5;
+        }
+        
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8e1d5;
+        }
+        
+        .recommendation-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #8B7355;
+        }
+        
+        .recommendation-title {
+            color: #8B7355;
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        
+        .recommendation-subtitle {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .recommendation-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #e8e1d5;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .recommendation-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        
+        .recommendation-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+        
+        .recommendation-item-title {
+            color: #8B7355;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .recommendation-item-era {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+        
+        .recommendation-item-description {
+            color: #666;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+        
+        .recommendation-reason {
+            background: #f0e6d6;
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #8B7355;
+        }
+        
+        /* 问答功能样式 */
+        .qa-section {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .qa-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .qa-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .qa-header h2 {
+            color: #8B7355;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .qa-header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .qa-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .qa-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e0d9cc;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .qa-input:focus {
+            border-color: #8B7355;
+        }
+        
+        .qa-button {
+            background: #8B7355;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .qa-button:hover {
+            background: #6B5B4D;
+        }
+        
+        .qa-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        
+        .qa-example {
+            background: #f0e6d6;
+            border: 1px solid #e0d9cc;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .qa-example:hover {
+            background: #8B7355;
+            color: white;
+            border-color: #8B7355;
+        }
+        
+        .qa-results {
+            margin-top: 30px;
+        }
+        
+        .qa-answer {
+            background: #f9f7f3;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e8e1d5;
+        }
+        
+        .qa-question {
+            color: #8B7355;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .qa-answer-text {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+        
+        .qa-related-items {
+            margin-top: 15px;
+        }
+        
+        .qa-related-title {
+            color: #8B7355;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .qa-related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .qa-related-item {
+            background: white;
+            border-radius: 6px;
+            padding: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e8e1d5;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .qa-related-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .qa-related-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .qa-related-name {
+            color: #8B7355;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .qa-no-answer {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-size: 1.1rem;
+        }
+        
+        .content-layout {
+            display: none;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        .content-layout.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .layout-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0e6d6;
+        }
+        
+        .layout-header h2 {
+            color: #8B7355;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .layout-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 优化主显示区域 */
+        .main-display {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            margin-bottom: 30px;
+            height: 600px;
+        }
+        
+        .knowledge-graph-section {
+            background: #f9f7f3;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .knowledge-graph-section h3 {
+            color: #8B7355;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .knowledge-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .exhibits-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .exhibit-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            border: 1px solid #e8e1d5;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .exhibit-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+        
+        .exhibit-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .exhibit-title {
+            color: #8B7355;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .exhibit-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        .description-section {
+            background: #f9f7f3;
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid #e8e1d5;
+        }
+        
+        .description-section h3 {
+            color: #8B7355;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            text-align: center;
+        }
+        
+        .description-content {
+            columns: 2;
+            column-gap: 30px;
+        }
+        
+        .description-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+            break-inside: avoid;
+        }
+        
+        .close-button {
+            background: #8B7355;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto 0;
+            display: block;
+            transition: background 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .close-button:hover {
+            background: #6B5B4D;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature h3 {
+            color: #8B7355;
+            margin-bottom: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #e0d9cc;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* 首页内容样式 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .image-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .museum-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .info-section h2 {
+            color: #8B7355;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .info-section p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* 加载动画 */
+        .loading-dots:after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        
+        @media (max-width: 1024px) {
+            .main-display {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            .exhibits-sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .knowledge-graph-section {
+                min-height: 400px;
+            }
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            .museum-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .navigation { flex-direction: column; align-items: center; }
+            .nav-button { width: 80%; }
+            .exhibits-sidebar { grid-template-columns: 1fr; }
+            .description-content { columns: 1; }
+            .search-box { flex-direction: column; }
+            .qa-input-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>智鉴文渊</h1>
+            <p class="subtitle">智慧博物馆的智能知识服务平台</p>
+        </header>
+        
+        <div class="navigation">
+            <button class="nav-button" onclick="showSection('home')">首页</button>
+            <button class="nav-button" onclick="showSection('search')">展品搜索推荐</button>
+            <button class="nav-button" onclick="showSection('qa')">智能互动问答</button>
+            <button class="nav-button" onclick="showSection('overview')">陶器发展全景</button>
+            <button class="nav-button" onclick="showSection('early')">早期陶器艺术</button>
+            <button class="nav-button" onclick="showSection('hantang')">汉唐陶器艺术</button>
+            <button class="nav-button" onclick="showSection('songqing')">宋元明清陶器</button>
+        </div>
+        
+        
+        <div id="home-section" class="content-layout">
+            <div class="main-content">
+                <div class="image-section">
+                    <img src="博物馆内部.webp" alt="博物馆内部" class="museum-image">
+                </div>
+                
+                <div class="info-section">
+                    <h2>欢迎来到“智鉴文渊”</h2>
+                    <p>博物馆珍藏了从新石器时代至清代的丰富陶器文物，展现了陶器艺术的完整发展脉络。</p>
+                    <p>本系统精选馆藏陶器精品，通过四个专题展区，带您领略陶器艺术的演变历程和工艺成就。</p>
+                    <p>从仰韶文化的彩陶到汉唐的釉陶，从西周的礼器到宋元的日用器，每一件陶器都承载着厚重的历史文化信息。</p>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <h3>年代序列完整</h3>
+                    <p>涵盖新石器时代至清代各时期代表性陶器</p>
+                </div>
+                <div class="feature">
+                    <h3>工艺类型丰富</h3>
+                    <p>灰陶、彩陶、釉陶、三彩等多种工艺类型</p>
+                </div>
+                <div class="feature">
+                    <h3>功能用途多样</h3>
+                    <p>礼器、日用器、明器、建筑构件等各类用途</p>
+                </div>
+                <div class="feature">
+                    <h3>智能搜索功能</h3>
+                    <p>快速定位您感兴趣的陶器展品</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 搜索功能页面 —— 完全保留 -->
+        <div id="search-section" class="content-layout">
+            <div class="layout-header">
+                <h2>展品搜索推荐</h2>
+                <p>通过关键词搜索或年代筛选，快速找到您感兴趣的陶器展品</p>
+            </div>
+            
+            <div class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" class="search-input" placeholder="输入展品名称、年代、工艺等关键词..." onkeypress="handleKeyPress(event)">
+                        <button class="search-button" onclick="performSearch()">搜索</button>
+                    </div>
+                    
+                    <div class="filter-options">
+                        <button class="filter-button active" onclick="setFilter('all')">全部</button>
+                        <button class="filter-button" onclick="setFilter('新石器')">新石器</button>
+                        <button class="filter-button" onclick="setFilter('西周')">西周</button>
+                        <button class="filter-button" onclick="setFilter('战国')">战国</button>
+                        <button class="filter-button" onclick="setFilter('汉')">汉代</button>
+                        <button class="filter-button" onclick="setFilter('唐')">唐代</button>
+                        <button class="filter-button" onclick="setFilter('宋')">宋代</button>
+                        <button class="filter-button" onclick="setFilter('元')">元代</button>
+                        <button class="filter-button" onclick="setFilter('明')">明代</button>
+                        <button class="filter-button" onclick="setFilter('清')">清代</button>
+                    </div>
+                </div>
+                
+                <div class="search-results">
+                    <div class="results-count" id="resultsCount">请输入关键词或选择年代进行搜索</div>
+                    <div class="results-grid" id="resultsGrid"></div>
+                </div>
+                
+                <div class="recommendation-section" id="recommendationSection" style="display: none;">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">💡</div>
+                        <div class="recommendation-title">相关推荐</div>
+                    </div>
+                    <div class="recommendation-subtitle" id="recommendationSubtitle">基于您的搜索，为您推荐以下相关展品</div>
+                    <div class="recommendation-grid" id="recommendationGrid"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="qa-section" class="content-layout">
+            <div class="qa-section">
+                <div class="qa-container">
+                    <div class="qa-header">
+                        <h2>智能互动问答</h2>
+                        <p>有任何关于陶器的问题，都可以在这里提问（AI大模型驱动）</p>
+                    </div>
+                    
+                    <div class="qa-input-container">
+                        <input type="text" id="qaInput" class="qa-input" placeholder="例如：仰韶文化彩陶钵有什么特点？" onkeypress="handleQAKeyPress(event)">
+                        <button class="qa-button" onclick="askQuestion()">提问</button>
+                    </div>
+                    
+                    <div class="qa-examples">
+                        <div class="qa-example" onclick="fillExample('仰韶文化彩陶钵有什么特点？')">仰韶文化彩陶钵有什么特点？</div>
+                        <div class="qa-example" onclick="fillExample('唐代有哪些代表性陶器？')">唐代有哪些代表性陶器？</div>
+                        <div class="qa-example" onclick="fillExample('什么是三彩陶器？')">什么是三彩陶器？</div>
+                        <div class="qa-example" onclick="fillExample('新石器时代的陶器有哪些？')">新石器时代的陶器有哪些？</div>
+                    </div>
+                    
+                    <div class="qa-results" id="qaResults"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="overview-section" class="content-layout">
+            <div class="layout-header">
+                <h2>陶器发展全景</h2>
+                <p>纵览中国陶器八千年发展历程，了解各时期代表性器物与工艺特征</p>
+            </div>
+            
+            <div class="main-display">
+                <div class="knowledge-graph-section">
+                    <h3>中国陶器发展全景图</h3>
+                    <img src="陶器发展全景.webp" alt="中国陶器发展全景图" class="knowledge-image">
+                </div>
+                
+                <div class="exhibits-sidebar">
+                    <div class="exhibit-item">
+                        <img src="陶器图片/新石器时代仰韶文化彩陶钵.webp" alt="仰韶文化彩陶钵" class="exhibit-image">
+                        <div class="exhibit-title">仰韶文化彩陶钵</div>
+                        <div class="exhibit-description">新石器时代代表性器物，红陶黑彩，纹饰神秘，开启中国彩陶艺术先河。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/西周灰陶鬲.webp" alt="西周灰陶鬲" class="exhibit-image">
+                        <div class="exhibit-title">西周灰陶鬲</div>
+                        <div class="exhibit-description">周文化典型炊器，袋状足设计实用美观，体现礼制规范下的器型特征。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/唐三彩凤首壶.webp" alt="唐三彩凤首壶" class="exhibit-image">
+                        <div class="exhibit-title">唐三彩凤首壶</div>
+                        <div class="exhibit-description">唐代三彩器精品，融合中西文化，釉色绚丽，代表盛唐艺术成就。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/元孔雀蓝釉三足鼎炉.webp" alt="元孔雀蓝釉鼎炉" class="exhibit-image">
+                        <div class="exhibit-title">元孔雀蓝釉鼎炉</div>
+                        <div class="exhibit-description">元代琉璃陶代表作，釉色鲜艳，造型庄重，展现多元文化融合。</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description-section">
+                <h3>中国陶器八千年发展脉络</h3>
+                <div class="description-content">
+                    <p><strong>新石器时代（约公元前6000年-前2000年）</strong>是中国陶器的起源时期。仰韶文化的彩陶以其精美的彩绘纹饰闻名，纹样多取材于自然界的鱼纹、蛙纹、几何纹等，体现了原始人类的宗教信仰和审美意识。这一时期的陶器主要以红陶、灰陶为主，制作工艺从手制逐渐发展到轮制。</p>
+                    <p><strong>夏商周时期（约公元前2070年-前256年）</strong>，陶器制作技术显著进步，出现了印纹硬陶和白陶。商代白陶胎质洁白，纹饰精美，多为贵族专用礼器。西周时期陶器器型更加规整，灰陶成为主流，形成了完整的礼器组合体系。</p>
+                    <p><strong>秦汉时期（公元前221年-公元220年）</strong>，铅釉陶器的出现是制陶工艺的重要突破。汉代陶器种类丰富，既有仿青铜礼器，也有反映日常生活的模型明器。彩绘陶在汉代达到高峰，纹饰题材多样，色彩鲜艳。</p>
+                    <p><strong>魏晋至唐代（公元220年-907年）</strong>，唐三彩成为唐代陶器的杰出代表。三彩器以黄、绿、白三色为主，釉色交融流淌，形成绚丽多彩的艺术效果。唐代陶俑艺术达到巅峰，造型生动传神，反映了唐代社会的开放包容。</p>
+                    <p><strong>宋元明清时期（公元960年-1912年）</strong>，瓷器成为日用器主流，但陶器在建筑、雕塑等领域继续发展。紫砂陶、琉璃陶、民俗陶器等各具特色，形成了丰富多彩的地方窑系，至今仍在传承发展。</p>
+                </div>
+            </div>
+            
+            <button class="close-button" onclick="showSection('home')">返回首页</button>
+        </div>
+        
+        <!-- 早期陶器艺术 —— 完全保留 -->
+        <div id="early-section" class="content-layout">
+            <div class="layout-header">
+                <h2>早期陶器艺术：新石器时代-战国</h2>
+                <p>探索陶器起源与礼制形成，了解从原始陶器到礼制用器的艺术演变</p>
+            </div>
+            
+            <div class="main-display">
+                <div class="knowledge-graph-section">
+                    <h3>早期陶器艺术知识图谱</h3>
+                    <img src="早期陶器艺术.webp" alt="早期陶器艺术知识图谱" class="knowledge-image">
+                </div>
+                
+                <div class="exhibits-sidebar">
+                    <div class="exhibit-item">
+                        <img src="陶器图片/新石器时代仰韶文化彩陶钵.webp" alt="仰韶文化彩陶钵" class="exhibit-image">
+                        <div class="exhibit-title">仰韶文化彩陶钵</div>
+                        <div class="exhibit-description">新石器时代代表性器物，红陶黑彩，纹饰抽象神秘，反映了原始人类的审美意识。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/新石器时代齐家文化双耳罐.webp" alt="齐家文化双耳罐" class="exhibit-image">
+                        <div class="exhibit-title">齐家文化双耳罐</div>
+                        <div class="exhibit-description">新石器时代晚期典型器型，双耳设计便于提携，胎质细腻，制作工艺明显进步。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/西周灰陶簋.webp" alt="西周灰陶簋" class="exhibit-image">
+                        <div class="exhibit-title">西周灰陶簋</div>
+                        <div class="exhibit-description">西周礼制用器，造型规整，胎质坚硬，体现了周代礼器制作的规范化。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/战国彩绘陶簋.webp" alt="战国彩绘陶簋" class="exhibit-image">
+                        <div class="exhibit-title">战国彩绘陶簋</div>
+                        <div class="exhibit-description">战国时期盛食器，彩绘纹饰精美繁复，反映了战国时期装饰工艺的进步。</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description-section">
+                <h3>早期陶器艺术发展</h3>
+                <div class="description-content">
+                    <p><strong>新石器时代</strong>是中国陶器的起源时期，陕西地区的仰韶文化、龙山文化、齐家文化等都留下了丰富的陶器遗存。仰韶文化彩陶以其精美的彩绘纹饰闻名于世，纹样多取材于自然界的鱼纹、蛙纹、几何纹等，体现了原始人类的宗教信仰和审美意识。</p>
+                    <p><strong>夏商时期</strong>，陶器制作技术显著进步，出现了印纹硬陶和白陶。商代白陶胎质洁白，纹饰精美，多为贵族专用礼器。这一时期陶器开始出现明确的礼器功能，与青铜器共同构成了商代礼制体系。</p>
+                    <p><strong>西周时期</strong>，陶器器型更加规整，灰陶成为主流。鬲、簋、豆、罐等礼器组合完整，反映了周代的礼制规范。西周陶器多素面或饰以绳纹、弦纹，风格朴实庄重，体现了周文化崇尚质朴的审美趣味。</p>
+                    <p><strong>春秋战国时期</strong>，陶器制作趋于精细化，彩绘陶开始流行。战国时期出现了暗纹陶、磨光陶等新工艺，陶器装饰更加丰富多彩。各诸侯国陶器风格各异，秦国的灰陶器以其规整的造型和细腻的胎质著称，为后来秦汉陶器的发展奠定了基础。</p>
+                    <p>早期陶器从实用器逐渐发展为礼器，其形制、纹饰的变化反映了中国古代社会结构、宗教信仰和审美观念的演变，为研究中国古代文明提供了重要的实物资料。</p>
+                </div>
+            </div>
+            
+            <button class="close-button" onclick="showSection('home')">返回首页</button>
+        </div>
+        
+        <!-- 汉唐陶器艺术 —— 完全保留 -->
+        <div id="hantang-section" class="content-layout">
+            <div class="layout-header">
+                <h2>汉唐陶器艺术</h2>
+                <p>探索汉唐盛世陶器艺术的辉煌成就，了解釉陶技术与雕塑艺术的高度发展</p>
+            </div>
+            
+            <div class="main-display">
+                <div class="knowledge-graph-section">
+                    <h3>汉唐陶器艺术知识图谱</h3>
+                    <img src="汉唐陶器艺术.webp" alt="汉唐陶器艺术知识图谱" class="knowledge-image">
+                </div>
+                
+                <div class="exhibits-sidebar">
+                    <div class="exhibit-item">
+                        <img src="陶器图片/汉彩绘茧形壶.webp" alt="汉彩绘茧形壶" class="exhibit-image">
+                        <div class="exhibit-title">汉彩绘茧形壶</div>
+                        <div class="exhibit-description">汉代典型器型，茧形设计独特，彩绘纹饰流畅，兼具实用与艺术价值。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/唐三彩凤首壶.webp" alt="唐三彩凤首壶" class="exhibit-image">
+                        <div class="exhibit-title">唐三彩凤首壶</div>
+                        <div class="exhibit-description">唐代三彩器精品，凤首造型优美，釉色绚丽斑斓，深受西域文化影响。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/唐彩绘天王俑.webp" alt="唐彩绘天王俑" class="exhibit-image">
+                        <div class="exhibit-title">唐彩绘天王俑</div>
+                        <div class="exhibit-description">唐代墓葬雕塑杰作，造型威武雄壮，彩绘鲜艳，体现了盛唐气象。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/唐三彩架鹰骑马俑.webp" alt="唐三彩架鹰骑马俑" class="exhibit-image">
+                        <div class="exhibit-title">三彩架鹰骑马俑</div>
+                        <div class="exhibit-description">反映唐代贵族狩猎生活，人物与马的造型生动传神，三彩釉色明亮。</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description-section">
+                <h3>汉唐陶器艺术特色</h3>
+                <div class="description-content">
+                    <p><strong>汉代（公元前202年-公元220年）</strong>陶器在秦代基础上进一步发展，形成了雄浑大气的艺术风格。铅釉陶器的出现是汉代制陶工艺的重要突破，绿釉、黄釉、褐釉等釉色丰富了陶器的装饰效果。</p>
+                    <p>汉代陶器种类丰富，既有仿青铜礼器的鼎、壶、盒等，也有反映日常生活的仓、灶、井等模型明器。彩绘陶在汉代达到高峰，纹饰题材包括云气纹、四神纹、狩猎纹等，色彩鲜艳，线条流畅。</p>
+                    <p><strong>唐代（公元618年-907年）</strong>是中国陶器艺术的黄金时期，唐三彩更是唐代陶器的杰出代表。三彩器以黄、绿、白三色为主，间以蓝、褐等色，釉色交融流淌，形成绚丽多彩的艺术效果。</p>
+                    <p>唐代陶俑艺术达到巅峰，人物俑、动物俑造型生动传神，反映了唐代社会的开放包容和多元文化交融。天王俑、武士俑威武雄壮，女俑丰腴端庄，胡人俑特征鲜明，都是唐代陶塑艺术的精品。</p>
+                    <p>唐代陶器还深受西域文化影响，凤首壶、胡瓶等器型具有明显的外来文化特征，体现了丝绸之路文化交流的成果。</p>
+                </div>
+            </div>
+            
+            <button class="close-button" onclick="showSection('home')">返回首页</button>
+        </div>
+        
+        <!-- 宋元明清陶器 —— 完全保留 -->
+        <div id="songqing-section" class="content-layout">
+            <div class="layout-header">
+                <h2>宋元明清陶器</h2>
+                <p>探索宋元明清时期陶器的多元化发展，了解民间陶艺与宫廷用器的不同风貌</p>
+            </div>
+            
+            <div class="main-display">
+                <div class="knowledge-graph-section">
+                    <h3>宋元明清陶器知识图谱</h3>
+                    <img src="宋元明清陶器.webp" alt="宋元明清陶器知识图谱" class="knowledge-image">
+                </div>
+                
+                <div class="exhibits-sidebar">
+                    <div class="exhibit-item">
+                        <img src="陶器图片/宋褐釉陶羊.webp" alt="宋褐釉陶羊" class="exhibit-image">
+                        <div class="exhibit-title">宋褐釉陶羊</div>
+                        <div class="exhibit-description">宋代陶塑精品，造型写实生动，褐釉均匀温润，体现了宋代审美趣味。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/金三彩双鱼纹盘.webp" alt="金三彩双鱼纹盘" class="exhibit-image">
+                        <div class="exhibit-title">金三彩双鱼纹盘</div>
+                        <div class="exhibit-description">金代三彩器，双鱼纹饰象征吉祥，釉色明快，具有北方游牧民族特色。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/元孔雀蓝釉三足鼎炉.webp" alt="元孔雀蓝釉三足鼎炉" class="exhibit-image">
+                        <div class="exhibit-title">元孔雀蓝釉鼎炉</div>
+                        <div class="exhibit-description">元代琉璃陶器，孔雀蓝釉色鲜艳夺目，造型古朴庄重，为祭祀用器。</div>
+                    </div>
+                    <div class="exhibit-item">
+                        <img src="陶器图片/清宣德炉形陶香炉.webp" alt="清宣德炉形陶香炉" class="exhibit-image">
+                        <div class="exhibit-title">清宣德炉形陶香炉</div>
+                        <div class="exhibit-description">清代仿古陶器，造型仿明代宣德炉，胎质细腻，体现了清代仿古风尚。</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="description-section">
+                <h3>晚期陶器发展特点</h3>
+                <div class="description-content">
+                    <p><strong>宋代（公元960年-1279年）</strong>，瓷器成为日用器的主流，但陶器仍在建筑、雕塑等领域发挥着重要作用。宋代陶器风格质朴典雅，褐釉、黑釉等单色釉陶器流行，体现了宋代文人崇尚的简约审美。</p>
+                    <p>宋代陶俑虽不及唐代华丽，但造型更加写实，表情细腻，反映了宋代社会的世俗化倾向。建筑用陶在宋代得到很大发展，琉璃瓦、吻兽等构件制作精美，色彩鲜艳。</p>
+                    <p><strong>元代（公元1271年-1368年）</strong>陶器融合了蒙古族文化和汉族传统，形成了粗犷豪放的风格。元代琉璃陶器成就突出，孔雀蓝、翡翠绿等釉色鲜艳夺目，多用于寺庙建筑装饰。</p>
+                    <p><strong>明代（公元1368年-1644年）</strong>，紫砂陶开始兴起，宜兴紫砂壶以其独特的材质和工艺受到文人雅士的喜爱。明代建筑琉璃工艺更加成熟，故宫、天坛等皇家建筑大量使用琉璃构件。</p>
+                    <p><strong>清代（公元1644年-1912年）</strong>陶器在仿古和创新两方面都有发展。一方面仿制古代陶器，追求古雅韵味；另一方面发展出各种民俗陶器，造型多样，装饰繁复，反映了清代社会的多元文化特征。</p>
+                </div>
+            </div>
+            
+            <button class="close-button" onclick="showSection('home')">返回首页</button>
+        </div>
+        
+        <footer>
+            <p>© 2026 智鉴文渊 | 智慧博物馆的智能知识服务平台</p>
+        </footer>
+    </div>
+
+    <script>
+        // ---------- 陶器数据库  ----------
+        const potteryDatabase = [
+            { id: 1, title: "仰韶文化彩陶钵", era: "新石器时代", image: "陶器图片/新石器时代仰韶文化彩陶钵.webp", description: "新石器时代代表性器物，红陶黑彩，纹饰神秘，开启中国彩陶艺术先河。", keywords: ["仰韶文化", "彩陶", "新石器", "红陶", "黑彩"], details: "仰韶文化彩陶钵是中国新石器时代仰韶文化的代表性器物，采用红陶材质，表面施以黑彩纹饰。其纹饰多取材于自然界的鱼纹、蛙纹、几何纹等，体现了原始人类的宗教信仰和审美意识。这种彩陶钵不仅是实用器皿，也是原始社会精神文化的重要载体。" },
+            { id: 2, title: "齐家文化双耳罐", era: "新石器时代", image: "陶器图片/新石器时代齐家文化双耳罐.webp", description: "新石器时代晚期典型器型，双耳设计便于提携，胎质细腻，制作工艺明显进步。", keywords: ["齐家文化", "双耳罐", "新石器", "实用器"], details: "齐家文化双耳罐是新石器时代晚期的典型器型，双耳设计便于提携，体现了实用性与美观性的结合。其胎质细腻，制作工艺较早期有明显进步，反映了当时制陶技术的提高。齐家文化陶器以灰陶为主，器型规整，纹饰简洁，具有鲜明的地域特色。" },
+            { id: 3, title: "西周灰陶鬲", era: "西周", image: "陶器图片/西周灰陶鬲.webp", description: "周文化典型炊器，袋状足设计实用美观，体现礼制规范下的器型特征。", keywords: ["西周", "灰陶", "鬲", "炊器", "礼器"], details: "西周灰陶鬲是周文化的典型炊器，袋状足设计既实用又美观，体现了礼制规范下的器型特征。西周时期陶器制作更加规范化，灰陶成为主流，器型规整，多素面或饰以绳纹、弦纹。鬲作为重要的礼器，反映了周代礼制体系的完善。" },
+            { id: 4, title: "战国彩绘陶簋", era: "战国", image: "陶器图片/战国彩绘陶簋.webp", description: "战国时期盛食器，彩绘纹饰精美繁复，反映了战国时期装饰工艺的进步。", keywords: ["战国", "彩绘", "簋", "盛食器", "纹饰"], details: "战国彩绘陶簋是战国时期的盛食器，彩绘纹饰精美繁复，反映了战国时期装饰工艺的进步。战国时期陶器制作趋于精细化，彩绘陶开始流行，纹饰题材更加丰富，色彩鲜艳。各诸侯国陶器风格各异，体现了战国时期文化的多样性。" },
+            { id: 5, title: "汉彩绘茧形壶", era: "汉代", image: "陶器图片/汉彩绘茧形壶.webp", description: "汉代典型器型，茧形设计独特，彩绘纹饰流畅，兼具实用与艺术价值。", keywords: ["汉代", "彩绘", "茧形壶", "实用器", "艺术"], details: "汉彩绘茧形壶是汉代典型器型，茧形设计独特，彩绘纹饰流畅，兼具实用与艺术价值。汉代陶器在秦代基础上进一步发展，形成了雄浑大气的艺术风格。铅釉陶器的出现是汉代制陶工艺的重要突破，丰富了陶器的装饰效果。" },
+            { id: 6, title: "唐三彩凤首壶", era: "唐代", image: "陶器图片/唐三彩凤首壶.webp", description: "唐代三彩器精品，凤首造型优美，釉色绚丽斑斓，深受西域文化影响。", keywords: ["唐代", "三彩", "凤首壶", "釉陶", "西域文化"], details: "唐三彩凤首壶是唐代三彩器精品，凤首造型优美，釉色绚丽斑斓，深受西域文化影响。唐代是中国陶器艺术的黄金时期，唐三彩更是唐代陶器的杰出代表。三彩器以黄、绿、白三色为主，釉色交融流淌，形成绚丽多彩的艺术效果。" },
+            { id: 7, title: "唐彩绘天王俑", era: "唐代", image: "陶器图片/唐彩绘天王俑.webp", description: "唐代墓葬雕塑杰作，造型威武雄壮，彩绘鲜艳，体现了盛唐气象。", keywords: ["唐代", "彩绘", "天王俑", "墓葬", "雕塑"], details: "唐彩绘天王俑是唐代墓葬雕塑杰作，造型威武雄壮，彩绘鲜艳，体现了盛唐气象。唐代陶俑艺术达到巅峰，人物俑、动物俑造型生动传神，反映了唐代社会的开放包容和多元文化交融。天王俑、武士俑威武雄壮，是唐代陶塑艺术的精品。" },
+            { id: 8, title: "宋褐釉陶羊", era: "宋代", image: "陶器图片/宋褐釉陶羊.webp", description: "宋代陶塑精品，造型写实生动，褐釉均匀温润，体现了宋代审美趣味。", keywords: ["宋代", "褐釉", "陶羊", "陶塑", "写实"], details: "宋褐釉陶羊是宋代陶塑精品，造型写实生动，褐釉均匀温润，体现了宋代审美趣味。宋代陶器风格质朴典雅，褐釉、黑釉等单色釉陶器流行，体现了宋代文人崇尚的简约审美。宋代陶俑虽不及唐代华丽，但造型更加写实，表情细腻。" },
+            { id: 9, title: "元孔雀蓝釉三足鼎炉", era: "元代", image: "陶器图片/元孔雀蓝釉三足鼎炉.webp", description: "元代琉璃陶器，孔雀蓝釉色鲜艳夺目，造型古朴庄重，为祭祀用器。", keywords: ["元代", "孔雀蓝釉", "鼎炉", "琉璃", "祭祀"], details: "元孔雀蓝釉三足鼎炉是元代琉璃陶器，孔雀蓝釉色鲜艳夺目，造型古朴庄重，为祭祀用器。元代陶器融合了蒙古族文化和汉族传统，形成了粗犷豪放的风格。元代琉璃陶器成就突出，孔雀蓝、翡翠绿等釉色鲜艳夺目，多用于寺庙建筑装饰。" },
+            { id: 10, title: "清宣德炉形陶香炉", era: "清代", image: "陶器图片/清宣德炉形陶香炉.webp", description: "清代仿古陶器，造型仿明代宣德炉，胎质细腻，体现了清代仿古风尚。", keywords: ["清代", "宣德炉", "香炉", "仿古", "陶器"], details: "清宣德炉形陶香炉是清代仿古陶器，造型仿明代宣德炉，胎质细腻，体现了清代仿古风尚。清代陶器在仿古和创新两方面都有发展。一方面仿制古代陶器，追求古雅韵味；另一方面发展出各种民俗陶器，造型多样，装饰繁复。" }
+        ];
+
+        // 本地知识库 
+        const qaKnowledgeBase = {
+            "仰韶文化": { description: "仰韶文化是中国新石器时代晚期的重要文化", relatedItems: [1, 2] },
+            "彩陶": { description: "彩陶是指在陶器表面施以彩色纹饰的陶器", relatedItems: [1, 4, 5] },
+            "唐三彩": { description: "唐三彩是唐代低温彩釉陶器的总称", relatedItems: [6, 7] },
+            "灰陶": { description: "灰陶是指烧成后呈灰色的陶器", relatedItems: [3, 4] },
+            "釉陶": { description: "釉陶是指表面施釉的陶器", relatedItems: [6, 9] }
+        };
+
+        let currentFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+        
+        function showSection(sectionName) {
+            const sections = ['home', 'search', 'qa', 'overview', 'early', 'hantang', 'songqing'];
+            sections.forEach(section => {
+                const element = document.getElementById(section + '-section');
+                if (element) element.classList.remove('active');
+            });
+            document.getElementById(sectionName + '-section').classList.add('active');
+            
+            const buttons = document.querySelectorAll('.nav-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(buttons).find(btn => 
+                btn.getAttribute('onclick').includes(sectionName)
+            );
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        // ---------- 搜索与推荐 ----------
+        function setFilter(filter) {
+            currentFilter = filter;
+            const buttons = document.querySelectorAll('.filter-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+            if (document.getElementById('searchInput').value.trim() !== '') performSearch();
+        }
+
+        function handleKeyPress(event) { if (event.key === 'Enter') performSearch(); }
+
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const resultsGrid = document.getElementById('resultsGrid');
+            const resultsCount = document.getElementById('resultsCount');
+            let filteredResults = potteryDatabase;
+            if (searchTerm !== '') {
+                filteredResults = filteredResults.filter(item => 
+                    item.title.toLowerCase().includes(searchTerm) || item.era.toLowerCase().includes(searchTerm) ||
+                    item.description.toLowerCase().includes(searchTerm) || item.keywords.some(k => k.toLowerCase().includes(searchTerm))
+                );
+            }
+            if (currentFilter !== 'all') filteredResults = filteredResults.filter(item => item.era.includes(currentFilter));
+            
+            if (filteredResults.length === 0) {
+                resultsGrid.innerHTML = '<div class="no-results">未找到匹配的展品，请尝试其他关键词或筛选条件</div>';
+                resultsCount.textContent = `找到 0 个结果`;
+                document.getElementById('recommendationSection').style.display = 'none';
+            } else {
+                resultsCount.textContent = `找到 ${filteredResults.length} 个结果`;
+                resultsGrid.innerHTML = filteredResults.map(item => `
+                    <div class="result-item">
+                        <img src="${item.image}" alt="${item.title}" class="result-image">
+                        <div class="result-title">${item.title}</div>
+                        <div class="result-era">${item.era}</div>
+                        <div class="result-description">${item.description}</div>
+                    </div>
+                `).join('');
+                showRecommendations(filteredResults);
+            }
+        }
+
+        function showRecommendations(searchResults) {
+            const recommendationSection = document.getElementById('recommendationSection');
+            const recommendationGrid = document.getElementById('recommendationGrid');
+            if (searchResults.length === 0) { recommendationSection.style.display = 'none'; return; }
+            const erasInResults = [...new Set(searchResults.map(item => item.era))];
+            const resultIds = searchResults.map(item => item.id);
+            let recommendations = [];
+            erasInResults.forEach(era => {
+                const sameEraItems = potteryDatabase.filter(item => item.era === era && !resultIds.includes(item.id));
+                recommendations = recommendations.concat(sameEraItems);
+            });
+            if (recommendations.length < 4) {
+                const remainingItems = potteryDatabase.filter(item => !resultIds.includes(item.id) && !recommendations.some(rec => rec.id === item.id));
+                recommendations = recommendations.concat(remainingItems.sort(() => 0.5 - Math.random()).slice(0, 4 - recommendations.length));
+            }
+            recommendations = recommendations.slice(0, 4);
+            if (recommendations.length > 0) {
+                recommendationSection.style.display = 'block';
+                document.getElementById('recommendationSubtitle').textContent = `基于您的搜索，为您推荐以下${recommendations.length}件相关展品`;
+                recommendationGrid.innerHTML = recommendations.map((item, index) => {
+                    let reason = erasInResults.includes(item.era) ? `与搜索结果同属${item.era}` : '您可能也会感兴趣';
+                    return `<div class="recommendation-item">
+                        <img src="${item.image}" class="recommendation-image">
+                        <div class="recommendation-item-title">${item.title}</div>
+                        <div class="recommendation-item-era">${item.era}</div>
+                        <div class="recommendation-item-description">${item.description}</div>
+                        <div class="recommendation-reason">${reason}</div>
+                    </div>`;
+                }).join('');
+            } else {
+                recommendationSection.style.display = 'none';
+            }
+        }
+
+        // ---------- 大模型问答  ----------
+        function handleQAKeyPress(event) { if (event.key === 'Enter') askQuestion(); }
+        function fillExample(question) { document.getElementById('qaInput').value = question; }
+
+        async function askQuestion() {
+            const question = document.getElementById('qaInput').value.trim();
+            const qaResults = document.getElementById('qaResults');
+            if (question === '') { qaResults.innerHTML = '<div class="qa-no-answer">请输入您的问题</div>'; return; }
+            
+            qaResults.innerHTML = '<div class="qa-answer"><div class="qa-question">正在思考中...</div><div class="qa-answer-text loading-dots">大模型正在生成回答</div></div>';
+            
+            try {
+                // 调用后端 API 
+                const response = await fetch('/api/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        question, 
+                        context: potteryDatabase.map(p => ({ title: p.title, era: p.era, details: p.details }))
+                    })
+                });
+                const data = await response.json();
+                if (data.error) throw new Error(data.error);
+                
+                const answerText = data.answer || '大模型暂时没有返回内容，请稍后再试。';
+                const relatedItems = findRelatedItemsFromQuestion(question);
+                
+                let html = `<div class="qa-answer"><div class="qa-question">❓ ${question}</div>
+                            <div class="qa-answer-text">${answerText.replace(/\n/g, '<br>')}</div>`;
+                if (relatedItems.length) {
+                    html += `<div class="qa-related-items"><div class="qa-related-title">📌 相关展品推荐</div><div class="qa-related-grid">`;
+                    relatedItems.forEach(item => {
+                        html += `<div class="qa-related-item"><img src="${item.image}" class="qa-related-image"><div class="qa-related-name">${item.title}</div></div>`;
+                    });
+                    html += `</div></div>`;
+                }
+                html += `</div>`;
+                qaResults.innerHTML = html;
+            } catch (error) {
+                console.warn('大模型调用失败，使用本地知识库回答:', error);
+                // 降级到本地回答
+                const localAnswer = findAnswerLocal(question);
+                displayAnswerLocal(question, localAnswer);
+            }
+        }
+
+        function findRelatedItemsFromQuestion(q) {
+            const lower = q.toLowerCase();
+            let ids = [];
+            for (let [kw, info] of Object.entries(qaKnowledgeBase)) {
+                if (lower.includes(kw.toLowerCase())) ids.push(...info.relatedItems);
+            }
+            potteryDatabase.forEach(p => { if (lower.includes(p.title.slice(0,4))) ids.push(p.id); });
+            return potteryDatabase.filter(p => ids.includes(p.id)).slice(0, 4);
+        }
+
+        // 本地回答 (原逻辑保留)
+        function findAnswerLocal(question) {
+            const lower = question.toLowerCase();
+            for (const item of potteryDatabase) {
+                if (lower.includes(item.title.toLowerCase())) {
+                    return { type: 'item', item, answer: `${item.title}是${item.era}的代表性陶器。${item.details}` };
+                }
+            }
+            const eraKeywords = ['新石器', '西周', '战国', '汉', '唐', '宋', '元', '明', '清'];
+            for (const era of eraKeywords) {
+                if (lower.includes(era.toLowerCase())) {
+                    const eraItems = potteryDatabase.filter(item => item.era.includes(era));
+                    if (eraItems.length) return { type: 'era', era, items: eraItems, answer: `${era}时期的代表性陶器包括：${eraItems.map(i=>i.title).join('、')}。` };
+                }
+            }
+            for (const [keyword, info] of Object.entries(qaKnowledgeBase)) {
+                if (lower.includes(keyword.toLowerCase())) {
+                    const relatedItems = info.relatedItems.map(id => potteryDatabase.find(p => p.id === id));
+                    return { type: 'keyword', keyword, info, items: relatedItems, answer: `${keyword}是指${info.description}` };
+                }
+            }
+            return { type: 'general', answer: "抱歉，我暂时无法回答这个问题。您可以尝试询问特定陶器的信息、某个朝代的陶器特点，或者某种陶器工艺的相关知识。" };
+        }
+
+        function displayAnswerLocal(question, answerData) {
+            const qaResults = document.getElementById('qaResults');
+            let html = `<div class="qa-answer"><div class="qa-question">问：${question}</div><div class="qa-answer-text">${answerData.answer}</div>`;
+            if (answerData.items) {
+                html += `<div class="qa-related-items"><div class="qa-related-title">相关展品：</div><div class="qa-related-grid">`;
+                answerData.items.forEach(item => {
+                    html += `<div class="qa-related-item"><img src="${item.image}" class="qa-related-image"><div class="qa-related-name">${item.title}</div></div>`;
+                });
+                html += `</div></div>`;
+            }
+            html += `</div>`;
+            qaResults.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
